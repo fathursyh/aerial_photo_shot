@@ -47,15 +47,17 @@ export default function PhotoBox() {
         setIsStreaming(false);
     }
     return (
-        <div className="w-full h-full bg-base-200 p-8 flex justify-center gap-10 items-center relative">
+        <div className="w-full h-full bg-base-200 p-8 flex justify-center gap-10 items-center">
             <section>
-                <div className="relative rounded-lg overflow-hidden">
+                <div className="relative rounded-lg overflow-hidden mb-2">
                     <div className={`w-full h-full bg-white absolute transition-all duration-100 opacity-0 ${flash && 'opacity-100'}`} />
-                    <video ref={video} className={`${!isStreaming && 'hidden'}`} />
+                    <video ref={video} className={`${!isStreaming && 'hidden'} w-[1000px]`} />
                 </div>
-                <button onClick={startCamera} className="btn btn-primary">Start</button>
+                <div className="flex justify-center gap-4">
+                <button onClick={startCamera} className="btn btn-info">Start</button>
                 <button onClick={setTimer} className="btn btn-primary">Take Photo</button>
                 <button onClick={stopVideo} className="btn btn-error">stop</button>
+                </div>
             </section>
             <aside className="bg-white p-8 flex flex-col gap-4 shadow-lg rounded">
                 <canvas ref={canvas} style={{ display: 'none' }}></canvas>
