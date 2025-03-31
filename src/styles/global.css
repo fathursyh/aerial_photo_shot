@@ -3,6 +3,10 @@
     themes: valentine --default
 }
 
+@theme {
+    --shadow-glow2: 0px 0px 14px 10px;
+}
+
 .btn {
     border-radius: 8px;
 }

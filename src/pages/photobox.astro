@@ -1,9 +1,10 @@
 ---
-import PhotoBox from "../components/react-component/PhotoBox";
+import PhotoBox from "../components/react-components/PhotoBox";
 import Layout from "../layouts/Layout.astro";
-
-
 ---
+
 <Layout>
-    <PhotoBox client:only/>
+    <div class="w-full bg-base-200 flex justify-center items-start relative">
+        <PhotoBox client:only/>
+    </div>
 </Layout>

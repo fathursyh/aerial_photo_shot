@@ -58,11 +58,10 @@ export default function PhotoBox() {
         setIsStreaming(false);
     }
     return (
-        <div className="w-full h-full bg-base-200 p-8 flex justify-center items-center relative">
-
+            <>
             <BasicModal max={true} show={modal} closeModal={stopVideo} confirm={setTimer}>
                 <span className="absolute bg-black/70 z-20 grid place-items-center w-10 h-10 rounded text-white text-2xl font-bold">{count}</span>
-                <section >
+                <section>
                     <div className="relative rounded-lg overflow-hidden mb-2">
                         <div className={`w-full h-full bg-white absolute transition-all duration-100 opacity-0 ${flash && 'opacity-100'}`} />
                         <video ref={video} className={`w-[1000px] bg-neutral-800`} />
@@ -72,14 +71,14 @@ export default function PhotoBox() {
                     </div>
                 </section>
             </BasicModal>
-            <aside className="bg-white p-8 flex flex-col gap-4 shadow-xl rounded cursor-pointer scale-90" onClick={startCamera}>
+            <aside className="bg-white p-8 flex flex-col gap-4 shadow-md rounded cursor-pointer hover:shadow-glow2 hover:shadow-accent transition-shadow duration-200" onClick={startCamera}>
                 <canvas ref={canvas} style={{ display: 'none' }}></canvas>
                 {
                     ([...Array(4).keys()]).map((item) => (
-                        <img width={250} height={170} className="rounded object-cover object-center photo max-h-[200px] overflow-hidden bg-neutral-800" key={item} />
+                        <img width={250} height={170} className="rounded object-cover object-center photo max-h-[200px] overflow-hidden bg-neutral-600" key={item} />
                     ))
                 }
             </aside>
-        </div>
+            </>
     );
 }
