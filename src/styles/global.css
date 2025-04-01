@@ -13,13 +13,19 @@
 }
 
 .action-buttons {
-    @apply w-20 h-20 bg-primary text-white rounded-full cursor-pointer hover:bg-primary/80
+    @apply w-20 h-20 bg-primary text-white rounded-full cursor-pointer transition-all duration-300
+}
+.action-buttons:hover {
+    transform: scale(1.1);
+}
+.action-buttons:active {
+    transform: scale(0.9);
+    @apply shadow-glow2 shadow-amber-300
 }
 
 
 @utility isometric {
     background-color: #e5e5f7;
-    opacity: 0.8;
     background-image:  linear-gradient(30deg, #dc6bdc 12%, transparent 12.5%, transparent 87%, #dc6bdc 87.5%, #dc6bdc), linear-gradient(150deg, #dc6bdc 12%, transparent 12.5%, transparent 87%, #dc6bdc 87.5%, #dc6bdc), linear-gradient(30deg, #dc6bdc 12%, transparent 12.5%, transparent 87%, #dc6bdc 87.5%, #dc6bdc), linear-gradient(150deg, #dc6bdc 12%, transparent 12.5%, transparent 87%, #dc6bdc 87.5%, #dc6bdc), linear-gradient(60deg, #dc6bdc77 25%, transparent 25.5%, transparent 75%, #dc6bdc77 75%, #dc6bdc77), linear-gradient(60deg, #dc6bdc77 25%, transparent 25.5%, transparent 75%, #dc6bdc77 75%, #dc6bdc77);
     background-size: 34px 60px;
     background-position: 0 0, 0 0, 17px 30px, 17px 30px, 0 0, 17px 30px;
@@ -38,7 +44,3 @@
 @utility moon {
     background-image: url('/moon.png');
 }
-
-
-/* aside {
-} */

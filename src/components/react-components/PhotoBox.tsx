@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import BasicModal from "./composables/BasicModal";
 import { createPortal } from "react-dom";
 import StyleActionsButton from "./StyleActionsButton";
@@ -14,7 +14,21 @@ export default function PhotoBox() {
     const video = useRef<HTMLVideoElement>(null);
     const canvas = useRef<HTMLCanvasElement>(null);
     const [isStreaming, setIsStreaming] = useState(false);
+
+    const beforeUnloadHandler = (event: Event) => {
+        if (index > 3) {
+            event.preventDefault();
+            return "";
+        }
+    };
+    useEffect(() => {
+        return () => {
+            window.removeEventListener("beforeunload", beforeUnloadHandler);
+        }
+    }, []);
+
     async function startCamera() {
+        index = 0;
         setModal(true);
         if (isStreaming) return;
         await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: false }).then((mediaStream) => {
@@ -51,6 +65,8 @@ export default function PhotoBox() {
                 stopVideo();
                 clearInterval(interval);
                 clearInterval(secondInterval);
+                window.addEventListener("beforeunload", beforeUnloadHandler);
+
             }
         }, 3000);
     }
@@ -80,7 +96,7 @@ export default function PhotoBox() {
                 </BasicModal>,
                 document.body
             )}
-            <aside className={`p-8 flex flex-col gap-4 shadow-md rounded cursor-pointer hover:shadow-glow2 hover:shadow-accent transition-all duration-200 relative ${stripStyle} bg-gray-100 group xl:scale-90 2xl:scale-100`}>
+            <aside className={`p-8 flex flex-col gap-4 shadow-md rounded cursor-pointer hover:shadow-glow2 hover:shadow-accent transition-all duration-300 relative ${stripStyle} bg-gray-100 group xl:scale-95 2xl:scale-100`}>
                 <canvas ref={canvas} style={{ display: "none" }}></canvas>
                 {[...Array(4).keys()].map((item) => (
                     <img width={250} height={170} className="rounded-xl object-cover object-center photo max-h-[200px] overflow-hidden bg-neutral-600 z-20" key={item} />
