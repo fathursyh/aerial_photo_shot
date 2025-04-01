@@ -3,7 +3,7 @@ import { useEffect, useRef, type ReactNode } from "react";
 type ModalProps = {
     children: ReactNode,
     show?: boolean,
-    closeModal? : () => void,
+    closeModal?: () => void,
     confirm?: () => void,
     max?: boolean
 }

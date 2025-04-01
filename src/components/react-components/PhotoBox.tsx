@@ -1,9 +1,12 @@
 import { useRef, useState } from "react";
 import BasicModal from "./composables/BasicModal";
 import { createPortal } from "react-dom";
+import StyleActionsButton from "./StyleActionsButton";
+import CameraActions from "./CameraActions";
 
 export default function PhotoBox() {
     let index = 0;
+    const [stripStyle, setStripStyle] = useState('');
     const [count, setCount] = useState(3);
     const [modal, setModal] = useState(false);
     const [flash, setFlash] = useState(false);
@@ -59,6 +62,9 @@ export default function PhotoBox() {
         video.current!.srcObject = null;
         setIsStreaming(false);
     }
+    function changeStyle(option : string) {
+        setStripStyle(option);
+    }
     return (
         <>
             {createPortal(
@@ -74,11 +80,13 @@ export default function PhotoBox() {
                 </BasicModal>,
                 document.body
             )}
-            <aside className="bg-white p-8 flex flex-col gap-4 shadow-md rounded cursor-pointer hover:shadow-glow2 hover:shadow-accent transition-shadow duration-200" onClick={startCamera}>
+            <aside className={`p-8 flex flex-col gap-4 shadow-md rounded cursor-pointer hover:shadow-glow2 hover:shadow-accent transition-all duration-200 relative ${stripStyle} bg-gray-100 group xl:scale-90 2xl:scale-100`}>
                 <canvas ref={canvas} style={{ display: "none" }}></canvas>
                 {[...Array(4).keys()].map((item) => (
-                    <img width={250} height={170} className="rounded object-cover object-center photo max-h-[200px] overflow-hidden bg-neutral-600" key={item} />
+                    <img width={250} height={170} className="rounded-xl object-cover object-center photo max-h-[200px] overflow-hidden bg-neutral-600 z-20" key={item} />
                 ))}
+                <CameraActions startCamera={startCamera}/>
+                <StyleActionsButton style={changeStyle} />
             </aside>
         </>
     );
